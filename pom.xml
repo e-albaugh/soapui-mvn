@@ -1,78 +1,54 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.demo.globalpayments.example</groupId>
-    <artifactId>countries-soapui-project-example</artifactId>
+    <groupId>com.smartbear.samples</groupId>
+    <artifactId>soapui-maven2-plugin</artifactId>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>SoapUI Maven example</name>
+    <name>Maven 2 SoapUI Sample</name>
     <url>http://maven.apache.org</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
-      </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-<groupId>org.reflections</groupId>
-<artifactId>reflections</artifactId>
-<version>0.9.9-RC1</version>
-</dependency>
-    </dependencies>
-
-
     <pluginRepositories>
         <pluginRepository>
             <id>SmartBearPluginRepository</id>
-            <url>http://smartbearsoftware.com/repository/maven2</url>
+            <url>http://www.soapui.org/repository/maven2/</url>
         </pluginRepository>
     </pluginRepositories>
-
+    
     <build>
         <plugins>
             <plugin>
                 <groupId>com.smartbear.soapui</groupId>
-                <artifactId>soapui-maven-plugin</artifactId>
-                <version>5.1.0</version>
-                <configuration>
-                    <projectFile>countries-soapui-project.xml</projectFile>
-                    <junitReport>true</junitReport>
-                    <outputFolder>${basedir}/target/surefire-reports</outputFolder>
-                    <projectProperties>
-                        <value></value>
-                    </projectProperties>
-                </configuration>
+                <artifactId>soapui-pro-maven-plugin</artifactId>
+                <version>4.6.1</version>
+                
+                <dependencies>
+                        <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+                </dependencies>  
+                
                 <executions>
                     <execution>
                         <phase>test</phase>
                         <goals>
                             <goal>test</goal>
                         </goals>
+                        <configuration>
+                            <projectFile>countries-soapui-project.xml</projectFile>
+                            <outputFolder>${basedir}/target/surefire-reports</outputFolder>
+                            <projectProperties>
+                                <value>message=Hello World!</value>
+                            </projectProperties>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.1.0</version>
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>${project.basedir}</directory>
-                            <includes>
-                                <include>*.log</include>
-                            </includes>
-                            <followSymlinks>false</followSymlinks>
-                        </fileset>
-                    </filesets>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
